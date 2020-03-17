@@ -3,14 +3,12 @@ import { Link, navigate } from 'gatsby';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 
 const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  isAdmin: false,
   error: null,
 };
 
@@ -32,12 +30,8 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne, isAdmin } = this.state;
-    const roles = {};
+    const { username, email, passwordOne } = this.state;
 
-    if (isAdmin) {
-      roles[ROLES.ADMIN] = ROLES.ADMIN;
-    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -46,7 +40,6 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          roles,
         });
       })
       .then(() => {
@@ -98,38 +91,34 @@ class SignUpFormBase extends Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="Full Name"
+          placeholder="username"
+          className="mb-2 py-2 px-1 w-full bg-gray-200"
         />
         <input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder="email"
+          className="mb-2 py-2 px-1 w-full bg-gray-200"
         />
         <input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeholder="Password"
+          placeholder="password"
+          className="mb-2 py-2 px-1 w-full bg-gray-200"
         />
         <input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeholder="Confirm Password"
+          placeholder="confirm"
+          className="mb-2 py-2 px-1 w-full bg-gray-200"
         />
-        <label>
-          Admin:
-          <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
-        </label>
+
         <button disabled={isInvalid} type="submit">
           Sign Up
         </button>

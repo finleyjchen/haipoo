@@ -1,19 +1,29 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { compose } from 'recompose';
 
 import Layout from '../components/layout';
+import {
+  withAuthorization,
+  withEmailVerification,
+} from '../components/Session';
+import Messages from '../components/Messages';
 
-const LandingPage = () => (
-  <Fragment>
-    <h1>Landing</h1>
-    <p>
-      The Landing Page is open to everyone, even though the user isn't
-      signed in.
-    </p>
-  </Fragment>
+const HomePageBase = () => (
+  <div>
+
+    <Messages />
+  </div>
 );
+
+const condition = authUser => !!authUser;
+
+const HomePage = compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(HomePageBase);
 
 export default () => (
   <Layout>
-    <LandingPage />
+    <HomePage />
   </Layout>
 );

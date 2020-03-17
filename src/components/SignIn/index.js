@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
+import {IoLogoGoogle} from 'react-icons/io'
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-
 const INITIAL_STATE = {
   email: '',
   password: '',
@@ -53,13 +53,14 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} className="p-2 border mb-2">
         <input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
+          className="mb-2 py-2 px-1 w-full bg-white"
         />
         <input
           name="password"
@@ -67,6 +68,7 @@ class SignInFormBase extends Component {
           onChange={this.onChange}
           type="password"
           placeholder="Password"
+          className="mb-2 py-2 px-1 w-full bg-white"
         />
         <button disabled={isInvalid} type="submit">
           Sign In
@@ -90,15 +92,24 @@ class SignInGoogleBase extends Component {
       .doSignInWithGoogle()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.user.displayName,
-          email: socialAuthUser.user.email,
-          roles: {},
-        });
+        console.log(socialAuthUser)
+        
+        if(socialAuthUser.additionalUserInfo.isNewUser) {
+          
+          return this.props.firebase.user(socialAuthUser.user.uid).set({
+            username: socialAuthUser.user.displayName,
+            email: socialAuthUser.user.email,
+            needsUsername: socialAuthUser.additionalUserInfo.isNewUser,
+          });
+        }
+        else {
+          return
+        }
       })
       .then(() => {
         this.setState({ error: null });
-        navigate(ROUTES.HOME);
+          navigate(ROUTES.ACCOUNT);
+
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -116,7 +127,7 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+        <button type="submit" className="bg-white border rounded-sm px-2 py-1">Sign in with <IoLogoGoogle className="float-right mt-1 ml-1" /> </button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -139,7 +150,6 @@ class SignInFacebookBase extends Component {
         return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.additionalUserInfo.profile.name,
           email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {},
         });
       })
       .then(() => {
@@ -185,7 +195,6 @@ class SignInTwitterBase extends Component {
         return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.additionalUserInfo.profile.name,
           email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {},
         });
       })
       .then(() => {

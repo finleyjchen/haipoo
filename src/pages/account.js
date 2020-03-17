@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react';
 import { compose } from 'recompose';
+import { navigate } from 'gatsby';
+
+import * as ROUTES from '../constants/routes';
 
 import Layout from '../components/layout';
 import {
@@ -10,16 +13,18 @@ import {
 import PasswordForgetForm from '../components/PasswordForget';
 import PasswordChangeForm from '../components/PasswordChange';
 import LoginManagement from '../components/LoginManagement';
+import UsernameForm from '../components/UsernameForm';
 
 const AccountPageBase = () => (
   <Fragment>
     <AuthUserContext.Consumer>
       {authUser => (
         <div>
-          <h1>Account: {authUser.email}</h1>
-          <PasswordForgetForm />
-          <PasswordChangeForm />
-          <LoginManagement authUser={authUser} />
+          {/* <h1>Account: {authUser.email}</h1> */}
+          {true ? <UsernameForm /> : navigate(ROUTES.HOME) }
+          {/* <PasswordForgetForm />
+          <PasswordChangeForm /> */}
+          {/* <LoginManagement authUser={authUser} /> */}
         </div>
       )}
     </AuthUserContext.Consumer>

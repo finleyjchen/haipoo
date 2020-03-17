@@ -8,7 +8,7 @@ const MessageList = ({
   onEditMessage,
   onRemoveMessage,
 }) => (
-  <ul>
+  <ul className="w-full flex flex-col ">
     {messages.map(message => (
       <MessageItem
         authUser={authUser}

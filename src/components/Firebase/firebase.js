@@ -1,10 +1,12 @@
 const config = {
-  apiKey: process.env.GATSBY_API_KEY,
-  authDomain: process.env.GATSBY_AUTH_DOMAIN,
-  databaseURL: process.env.GATSBY_DATABASE_URL,
-  projectId: process.env.GATSBY_PROJECT_ID,
-  storageBucket: process.env.GATSBY_STORAGE_BUCKET,
-  messagingSenderId: process.env.GATSBY_MESSAGING_SENDER_ID,
+  apiKey: "AIzaSyBACREx8l7kiqAJvu-Kr0fh3tLZwy851fc",
+  authDomain: "haipoo.firebaseapp.com",
+  databaseURL: "https://haipoo.firebaseio.com",
+  projectId: "haipoo",
+  storageBucket: "haipoo.appspot.com",
+  messagingSenderId: "769060609214",
+  appId: "1:769060609214:web:2b4ae345bd67b74472d2ef",
+  measurementId: "G-DDC2P715CB"
 };
 
 class Firebase {
@@ -66,11 +68,6 @@ class Firebase {
           .once('value')
           .then(snapshot => {
             const dbUser = snapshot.val();
-
-            // default empty roles
-            if (!dbUser.roles) {
-              dbUser.roles = {};
-            }
 
             // merge auth and db user
             authUser = {
