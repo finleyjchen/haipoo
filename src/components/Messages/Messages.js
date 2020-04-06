@@ -16,7 +16,7 @@ class Messages extends Component {
       newPostActive: false,
       loading: false,
       messages: [],
-      limit: 10,
+      limit: 20,
     };
   }
 
