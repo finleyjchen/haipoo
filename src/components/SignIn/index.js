@@ -92,7 +92,6 @@ class SignInGoogleBase extends Component {
       .doSignInWithGoogle()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        console.log(socialAuthUser)
         
         if(socialAuthUser.additionalUserInfo.isNewUser) {
           

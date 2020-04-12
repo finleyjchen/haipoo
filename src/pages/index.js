@@ -1,7 +1,8 @@
 import React from 'react';
 import { compose } from 'recompose';
-
+import Router from "@reach/router"
 import Layout from '../components/layout';
+import Poem from "../components/Messages/Poem"
 import {
   withAuthorization,
   withEmailVerification,
@@ -24,6 +25,7 @@ const HomePage = compose(
 
 export default () => (
   <Layout>
+
     <HomePage />
   </Layout>
 );

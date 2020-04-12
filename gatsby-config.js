@@ -20,5 +20,10 @@ module.exports = {
     },
     "gatsby-plugin-offline",
     // "gatsby-plugin-remove-serviceworker",
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/poem/*`] },
+    },
+
   ],
 };
