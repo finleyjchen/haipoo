@@ -55,7 +55,7 @@ const NavigationAuth = ({ authUser }) => (
       </Link>
     </li>
     <li>
-      <SignOutButton className="px-2 py-1 text-sm hover:bg-gray-200" />
+      <SignOutButton />
     </li>
   </React.Fragment>
 );
@@ -63,10 +63,10 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
   <React.Fragment>
     <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <Link to={ROUTES.SIGN_IN} className="px-2 py-1 text-sm hover:bg-gray-200">Sign In</Link>
     </li>
     <li>
-      <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+      <Link to={ROUTES.SIGN_UP} className="px-2 py-1 text-sm hover:bg-gray-200">Sign Up</Link>
     </li>
   </React.Fragment>
 );
