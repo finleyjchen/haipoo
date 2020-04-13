@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import * as timeago from 'timeago.js';
-
+import { Link } from "gatsby"
 class MessageItem extends Component {
   constructor(props) {
     super(props);
     console.log(this.props.message.userId);
     this.state = {
       username: '',
+      loading: false,
+
       editMode: false,
       editText: this.props.message.text,
     };
   }
 
   componentDidMount() {
+ 
     this.props.firebase
       .user(this.props.message.userId)
       .once('value', snapshot => {
@@ -54,7 +57,7 @@ class MessageItem extends Component {
             <textarea
               value={editText}
               onChange={this.onChangeEditText}
-              className="font-serif mb-2 py-2 px-1 w-full bg-gray-100 whitespace-pre-line"
+              className=" mb-2 py-2 px-1 w-full bg-gray-100 whitespace-pre-line"
               rows="3"
             />
             <span>
@@ -76,8 +79,8 @@ class MessageItem extends Component {
           <React.Fragment>
             <div>
               <p className="text-xl font-bold mb-2 ">
-                {message.title}
-                {authUser.uid === message.userId && (
+                <Link to={"/poem/" + message.uid}>{message.title}</Link>
+                {authUser && authUser.uid === message.userId && (
                   <span className="text-xs float-right">
                     <button
                       className="border py-1 px-2 mr-1"
@@ -96,7 +99,7 @@ class MessageItem extends Component {
                 )}
               </p>
 
-              <p className="whitespace-pre-line font-serif mb-2 text-lg">{message.text}</p>
+              <p className="whitespace-pre-line  mb-2 text-lg">{message.text}</p>
             </div>
             <div className="flex justify-between mt-auto">
               <p>

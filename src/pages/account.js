@@ -20,11 +20,12 @@ const AccountPageBase = () => (
     <AuthUserContext.Consumer>
       {authUser => (
         <div>
-          {/* <h1>Account: {authUser.email}</h1> */}
-          {true ? <UsernameForm /> : navigate(ROUTES.HOME) }
-          {/* <PasswordForgetForm />
-          <PasswordChangeForm /> */}
-          {/* <LoginManagement authUser={authUser} /> */}
+          <h1>Account: {authUser.email}</h1>
+          {authUser.needsUsername ? <UsernameForm /> : <Fragment></Fragment> }
+          
+          <PasswordForgetForm />
+          {/* <PasswordChangeForm /> */}
+          <LoginManagement authUser={authUser} />
         </div>
       )}
     </AuthUserContext.Consumer>

@@ -6,49 +6,69 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
 const Navigation = () => (
-  <nav className="sm:mt-10 container max-w-4xl mx-auto text-left  w-full">
+  <nav className="p-4 sm:p-0 sm:mt-16 container max-w-4xl mx-auto text-left flex justify-between w-full items-center">
+    <Link
+      to={ROUTES.HOME}
+      className="text-xl font-bold uppercase tracking-wider"
+    >
+      Haipoo
+    </Link>
+    <ul className="flex flex-wrap content-center flex-row justify-between items-center py-2">
+      <li>
+        <Link
+          to={'/poem/' + 'all'}
+          className="px-2 py-1 text-sm hover:bg-gray-200"
+        >
+          All
+        </Link>
+      </li>
 
-  <AuthUserContext.Consumer>
-    {authUser =>
-      authUser ? (
-        <NavigationAuth authUser={authUser} />
-        ) : (
-          <NavigationNonAuth />
+      <AuthUserContext.Consumer>
+        {(authUser) =>
+          authUser ? (
+            <NavigationAuth authUser={authUser} />
+          ) : (
+            <NavigationNonAuth />
           )
         }
-  </AuthUserContext.Consumer>
+      </AuthUserContext.Consumer>
+    </ul>
   </nav>
 );
 
 const NavigationAuth = ({ authUser }) => (
-  <ul className="flex flex-wrap content-center flex-row justify-between items-center py-2">
-
-    <li className="text-3xl font-bold w-full sm:w-auto">
-      <Link to={ROUTES.HOME}>Haipoo
-      <span className="block text-xs font-light">Haikus about poo</span></Link>
-    </li>
-    {/* <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li> */}
+  <React.Fragment>
     <li>
-      <SignOutButton />
+      <Link
+        to={ROUTES.ACCOUNT}
+        className="px-2 py-1 text-sm hover:bg-gray-200"
+      >
+        Account
+      </Link>
     </li>
-  </ul>
+    <li>
+      <Link
+        to={ROUTES.CREATE}
+        className="px-2 py-1 text-sm hover:bg-gray-200"
+      >
+        Create
+      </Link>
+    </li>
+    <li>
+      <SignOutButton className="px-2 py-1 text-sm hover:bg-gray-200" />
+    </li>
+  </React.Fragment>
 );
 
 const NavigationNonAuth = () => (
-  <ul className="flex flex-wrap content-center flex-row justify-between items-center">
-    <li className="text-xl font-bold">
-      <Link to={ROUTES.HOME}>Haipoo
-      <span className="block text-xs font-light">Haikus about poo</span></Link>
-    </li>
+  <React.Fragment>
     <li>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
     <li>
       <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
     </li>
-  </ul>
+  </React.Fragment>
 );
 
 export default Navigation;

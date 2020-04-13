@@ -2,30 +2,29 @@ import React from 'react';
 import { compose } from 'recompose';
 import Router from "@reach/router"
 import Layout from '../components/layout';
-import Poem from "../components/Messages/Poem"
+import CreatePoem from "../components/Messages/CreatePoem"
 import {
   withAuthorization,
   withEmailVerification,
 } from '../components/Session';
-import Messages from '../components/Messages';
 
-const HomePageBase = () => (
+const CreatePoemBase = () => (
   <div>
 
-    <Messages />
+    <CreatePoem />
   </div>
 );
 
 const condition = authUser => !!authUser;
 
-const HomePage = compose(
+const CreatePoemPage = compose(
   withEmailVerification,
   withAuthorization(condition),
-)(HomePageBase);
+)(CreatePoemBase);
 
 export default () => (
   <Layout title="test">
 
-    <HomePageBase />
+    <CreatePoemPage />
   </Layout>
 );
