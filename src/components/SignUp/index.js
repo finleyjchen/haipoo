@@ -119,7 +119,7 @@ class SignUpFormBase extends Component {
           className="mb-2 py-2 px-1 w-full bg-gray-200"
         />
 
-        <button disabled={isInvalid} type="submit">
+        <button disabled={isInvalid} type="submit" className="bg-black text-white px-2 py-1 mr-4 border border-gray-800 rounded-sm">
           Sign Up
         </button>
 

@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import MessageList from './MessageList';
+import { navigate } from 'gatsby';
 
 class CreatePoem extends Component {
   _initFirebase = false;
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       title: '',
       text: '',
@@ -46,7 +47,7 @@ class CreatePoem extends Component {
       title: '', 
       newPostActive: false,
     });
-
+    navigate("/poem/all")
     event.preventDefault();
   };
 

@@ -31,7 +31,7 @@ class Layout extends Component {
 }
 
 const AppWithAuthentication = withAuthentication(({ children }) => (
-  <div className="">
+  <div className="p-4">
     <Helmet>
       <meta charSet="utf-8" />
       <title>Haipoo</title>
@@ -41,7 +41,7 @@ const AppWithAuthentication = withAuthentication(({ children }) => (
 
     </Helmet>
     <Navigation />
-    <main className="container max-w-4xl w-full mx-auto mt-10">
+    <main className="container max-w-4xl w-full mx-auto mt-10 ">
     {children}
     </main>
   </div>

@@ -6,14 +6,14 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
 const Navigation = () => (
-  <nav className="p-4 sm:p-0 sm:mt-16 container max-w-4xl mx-auto text-left flex justify-between w-full items-center">
+  <nav className=" sm:p-0 sm:mt-16 container max-w-4xl mx-auto text-left flex justify-between w-full items-center ">
     <Link
       to={ROUTES.HOME}
       className="text-xl font-bold uppercase tracking-wider"
     >
       Haipoo
     </Link>
-    <ul className="flex flex-wrap content-center flex-row justify-between items-center py-2">
+    <ul className="flex flex-wrap content-center flex-row justify-between items-center py-2 font-sans">
       <li>
         <Link
           to={'/poem/' + 'all'}
@@ -46,7 +46,7 @@ const NavigationAuth = ({ authUser }) => (
         Account
       </Link>
     </li>
-    
+
     <li>
       <Link
         to={ROUTES.CREATE}

@@ -3,6 +3,8 @@ import { navigate } from 'gatsby';
 import {IoLogoGoogle} from 'react-icons/io'
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { PasswordForgetLink } from '../PasswordForget';
+
 const INITIAL_STATE = {
   email: '',
   password: '',
@@ -52,7 +54,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit} className="p-2 border mb-2">
+      <form onSubmit={this.onSubmit} className="">
         <input
           name="email"
           value={email}
@@ -69,9 +71,13 @@ class SignInFormBase extends Component {
           placeholder="Password"
           className="mb-2 py-2 px-1 w-full bg-white"
         />
-        <button disabled={isInvalid} type="submit">
+        <div className="flex items-center">
+
+        <button disabled={isInvalid} type="submit" className="bg-black text-white px-2 py-1 mr-4 border border-gray-800 rounded-sm">
           Sign In
         </button>
+        <PasswordForgetLink />
+        </div>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -125,7 +131,7 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit" className="bg-white border rounded-sm px-2 py-1">Sign in with <IoLogoGoogle className="float-right mt-1 ml-1" /> </button>
+        <button type="submit" className="border border-gray-800 rounded-sm px-2 py-1 flex justify-center w-full">Sign in with <IoLogoGoogle className="float-right mt-1 ml-1" /> </button>
 
         {error && <p>{error.message}</p>}
       </form>

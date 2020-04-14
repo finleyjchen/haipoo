@@ -1,39 +1,86 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import * as timeago from 'timeago.js';
-import { Link } from "gatsby"
-class MessageItem extends Component {
+import {Link} from "gatsby"
+class Poem extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.message.userId);
     this.state = {
       username: '',
-      loading: false,
-
+      userId: this.props.userId,
+      message: {},
+      messages: [],
       editMode: false,
-      editText: this.props.message.text,
+      editText: "",
+      nextId: '',
+      prevId: '',
     };
   }
 
+  firebaseInit = () => {
+    if (this.props.firebase && !this._initFirebase) {
+      this._initFirebase = true;
+
+      this.getMessage();
+      this.getUsername();
+    }
+  };
+
   componentDidMount() {
- 
+    console.log("mounting")
+    this.firebaseInit();
+  }
+
+  componentDidUpdate() {
+    this.firebaseInit();
+  }
+
+  getMessages = () => {
+    const { userId } = this.state;
+
     this.props.firebase
-      .user(this.props.message.userId)
-      .once('value', snapshot => {
-        const user = snapshot.val();
-        if (user) {
-          console.log(user.username);
-          this.setState(state => ({
-            username: user.username,
+      .messages().on('value', snapshot => {
+        const messageObject = snapshot.val();
+
+        if (messageObject) {
+          const messageList = Object.keys(messageObject).map(key => ({
+            ...messageObject[key],
+            uid: key,
           }));
+          var currentIndex = messageList.map(message => message.userId).
+          console.log(currentIndex)
+          if(currentIndex == 0 ) {
+            var prevIndex = false
+            var nextIndex = messageList[currentIndex + 1].uid
+
+          } else if(currentIndex == messageList.length - 1) {
+            var nextIndex = false
+            var prevIndex = messageList[currentIndex - 1].uid
+
+          } else {
+            var prevIndex = messageList[currentIndex - 1].uid
+            var nextIndex = messageList[currentIndex + 1].uid
+          }
+          this.setState({
+            messages: messageList,
+            loading: false,
+            prevId: prevIndex,
+            nextId: nextIndex
+          });
+        } else {
+          this.setState({ messages: null, loading: false });
         }
       });
+  }
+
+  getUsername = () => {
+
   }
 
   onToggleEditMode = () => {
     this.setState(state => ({
       editMode: !state.editMode,
-      editText: this.props.message.text,
+      editText: this.state.message.text,
     }));
   };
 
@@ -48,10 +95,11 @@ class MessageItem extends Component {
   };
 
   render() {
-    const { authUser, message, onRemoveMessage } = this.props;
-    const { editMode, editText, username } = this.state;
+    const { authUser, onRemoveMessage } = this.props;
+    const { editMode, editText, username, message, loading, nextId, prevId } = this.state;
     return (
-      <li className="text-center p-2 mb-24 bg-white ">
+      <article className="block p-2 mb-4 bg-white w-full text-center">
+         {loading && <div>Loading ...</div>}
         {editMode ? (
           <React.Fragment>
             <textarea
@@ -78,8 +126,8 @@ class MessageItem extends Component {
         ) : (
           <React.Fragment>
             <div>
-              <p className="text-lg font-bold mb-2 ">
-                <Link className="hover:underline" to={"/poem/" + message.uid}>{message.title}</Link>
+              <h1 className="text-xl font-bold mb-2 ">
+                {message.title}
                 {authUser && authUser.uid === message.userId && (
                   <span className="text-xs float-right">
                     <button
@@ -97,7 +145,7 @@ class MessageItem extends Component {
                     </button>
                   </span>
                 )}
-              </p>
+              </h1>
 
               <p className="whitespace-pre-line  mb-2 text-2xl">{message.text}</p>
             </div>
@@ -122,9 +170,15 @@ class MessageItem extends Component {
             </div>
           </React.Fragment>
         )}
-      </li>
+        <div className="flex justify-between">
+
+
+        {prevId && <Link to={"/poem/" + prevId}> &larr; Previous</Link>}
+        {nextId && <Link to={"/poem/" + nextId}>Next &rarr;</Link>}
+        </div>
+      </article>
     );
   }
 }
 
-export default withFirebase(MessageItem);
+export default withFirebase(Poem);

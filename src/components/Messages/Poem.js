@@ -178,8 +178,9 @@ class Poem extends Component {
             </div>
             <div className="flex justify-between mt-10 border-t border-black w-64 mx-auto pt-1">
               <p>
+
                 <em>
-                  By <strong>{username}</strong>
+                 <strong>{username && "By " + username}</strong>
                 </em>
               </p>
               <p className="">
@@ -197,11 +198,11 @@ class Poem extends Component {
             </div>
           </React.Fragment>
         )}
-        <div className="flex justify-between">
+        <div className="flex justify-between absolute bottom-0 sm:static w-full left-0 p-5 ">
 
 
-        {prevId && <Link to={"/poem/" + prevId}> &larr; Previous</Link>}
-        {nextId && <Link to={"/poem/" + nextId}>Next &rarr;</Link>}
+        <div>{prevId && <Link to={"/poem/" + prevId} className="px-4 py-2 bg-gray-800 text-white"> &larr; Previous</Link>}</div>
+        <div>{nextId && <Link to={"/poem/" + nextId} className="px-4 py-2 bg-gray-800 text-white">Next &rarr;</Link>}</div>
         </div>
       </article>
     );
