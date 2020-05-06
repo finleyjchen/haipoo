@@ -1,25 +1,30 @@
 import React from 'react';
 import { Link } from 'gatsby';
-
+import { Menu } from 'react-feather';
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
-const Navigation = () => (
+const Navigation = () => {
+  const [open, setOpen] = React.useState(false);
+  const toggle = () => setOpen(!open);
+  return (
   <nav className=" sm:p-0 sm:mt-16 container max-w-4xl mx-auto text-left flex justify-between w-full items-center ">
     <Link
       to={ROUTES.HOME}
-      className="text-xl font-bold uppercase tracking-wider"
+      className="text-2xl"
     >
       Haipoo
     </Link>
-    <ul className="flex flex-wrap content-center flex-row justify-between items-center py-2 font-sans">
+    <div className={` `}>
+    <a href="#" onClick={ () => setOpen(!open)}><Menu /></a>
+    <ul className={`${ open ? '' : 'hidden' } text-center bg-white w-full  absolute top-0 left-0 mt-12 md:mt-32 flex flex-col text-gray-800 text-lg`}>
       <li>
         <Link
           to={'/poem/' + 'all'}
-          className="px-2 py-1 text-sm hover:bg-gray-200"
-        >
-          All
+          className="px-2 py-1 hover:text-gray-600"
+          >
+          Home
         </Link>
       </li>
 
@@ -27,21 +32,22 @@ const Navigation = () => (
         {(authUser) =>
           authUser ? (
             <NavigationAuth authUser={authUser} />
-          ) : (
-            <NavigationNonAuth />
-          )
-        }
+            ) : (
+              <NavigationNonAuth />
+              )
+            }
       </AuthUserContext.Consumer>
     </ul>
+            </div>
   </nav>
-);
+)};
 
 const NavigationAuth = ({ authUser }) => (
   <React.Fragment>
     <li>
       <Link
         to={ROUTES.ACCOUNT}
-        className="px-2 py-1 text-sm hover:bg-gray-200"
+        className="px-2 py-1 hover:text-gray-600"
       >
         Account
       </Link>
@@ -50,7 +56,7 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <Link
         to={ROUTES.CREATE}
-        className="px-2 py-1 text-sm hover:bg-gray-200"
+        className="px-2 py-1 hover:text-gray-600"
       >
         Create
       </Link>
@@ -64,10 +70,10 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
   <React.Fragment>
     <li>
-      <Link to={ROUTES.SIGN_IN} className="px-2 py-1 text-sm hover:bg-gray-200">Sign In</Link>
+      <Link to={ROUTES.SIGN_IN} className="px-2 py-1 hover:text-gray-600">Sign In</Link>
     </li>
     <li>
-      <Link to={ROUTES.SIGN_UP} className="px-2 py-1 text-sm hover:bg-gray-200">Sign Up</Link>
+      <Link to={ROUTES.SIGN_UP} className="px-2 py-1 hover:text-gray-600">Sign Up</Link>
     </li>
   </React.Fragment>
 );

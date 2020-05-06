@@ -35,7 +35,7 @@ const AppWithAuthentication = withAuthentication(({ children }) => (
     <Helmet>
       <meta charSet="utf-8" />
       <title>Haipoo</title>
-      <meta name="description" content="Be where your bum is. Haiku's about poop." />
+      <meta name="description" content="Be where your bum is. Haikus about poop." />
       <link rel="stylesheet" href="https://use.typekit.net/aku5owx.css" />
 
 

@@ -6,10 +6,11 @@
 
 body {
     /* background-color:rgb(250, 248, 242); */
-    font-family: minion-3, serif;
+    font-family: calluna, serif;
+    font-family: plantin, sans-serif;
+
     font-size:16px;
 }
 
 .font-sans {
-    font-family: neue-haas-unica, sans-serif;
 }

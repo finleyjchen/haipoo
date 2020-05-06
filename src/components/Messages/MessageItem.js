@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import * as timeago from 'timeago.js';
 import { Link } from "gatsby"
+import { Heart } from "react-feather"
 class MessageItem extends Component {
   constructor(props) {
     super(props);

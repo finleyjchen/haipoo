@@ -6,7 +6,7 @@ const SignOutButton = ({ firebase }) => (
   <a
   href="#"
     onClick={firebase ? firebase.doSignOut : () => {}}
-    className="px-2 py-1 text-sm hover:bg-gray-200"
+    className="px-2 py-1 hover:text-gray-600"
   >
     Sign Out
   </a>

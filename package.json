@@ -1,6 +1,6 @@
 {
-  "name": "react-gastby-firebase-authentication",
-  "description": "Gatsby hello world starter",
+  "name": "haipoo",
+  "description": "Be where your bum is. Haikus about poop.",
   "scripts": {
     "develop": "gatsby develop",
     "start": "npm run develop",
@@ -11,7 +11,7 @@
     "axios": "^0.19.2",
     "core-js": "^2.6.5",
     "firebase": "^6.0.2",
-    "gatsby": "^2.4.3",
+    "gatsby": "^2.21.12",
     "gatsby-plugin-create-client-paths": "^2.2.1",
     "gatsby-plugin-manifest": "^2.3.3",
     "gatsby-plugin-offline": "^3.1.2",
@@ -21,6 +21,7 @@
     "gatsby-plugin-sass": "^2.1.23",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-feather": "^2.0.8",
     "react-helmet": "^6.0.0",
     "react-icons": "^3.8.0",
     "recompose": "^0.30.0",
