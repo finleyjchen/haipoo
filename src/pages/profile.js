@@ -10,37 +10,39 @@ import {
   withAuthorization,
   withEmailVerification,
 } from '../components/Session';
-import PasswordForgetForm from '../components/PasswordForget';
+import PasswordForgetLink from '../components/PasswordForget';
 import PasswordChangeForm from '../components/PasswordChange';
 import LoginManagement from '../components/LoginManagement';
 import UsernameForm from '../components/UsernameForm';
+import SignOutButton from '../components/SignOut'
 
-const AccountPageBase = () => (
-  <Fragment>
+const ProfilePageBase = () => (
+  <div className="max-w-xs mx-auto text-center">
     <AuthUserContext.Consumer>
       {authUser => (
         <div>
-          <h1>Account: {authUser.email}</h1>
-          {authUser.needsUsername ? <UsernameForm /> : <Fragment></Fragment> }
           
-          <PasswordForgetForm />
+          {authUser.needsUsername ? <UsernameForm /> : <h1>{authUser.email}</h1> }
+          
+          <PasswordForgetLink />
           {/* <PasswordChangeForm /> */}
           <LoginManagement authUser={authUser} />
+          <SignOutButton />
         </div>
       )}
     </AuthUserContext.Consumer>
-  </Fragment>
+  </div>
 );
 
 const condition = authUser => !!authUser;
 
-const AccountPage = compose(
+const ProfilePage = compose(
   withEmailVerification,
   withAuthorization(condition),
-)(AccountPageBase);
+)(ProfilePageBase);
 
 export default () => (
   <Layout>
-    <AccountPage />
+    <ProfilePage />
   </Layout>
 );

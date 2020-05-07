@@ -40,10 +40,14 @@ const AppWithAuthentication = withAuthentication(({ children }) => (
 
 
     </Helmet>
+
+    <header>
     <Navigation />
+    </header>
     <main className="container max-w-4xl w-full mx-auto mt-10 ">
     {children}
     </main>
+    
   </div>
 ));
 

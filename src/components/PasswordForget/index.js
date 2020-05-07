@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'gatsby';
 
 import { withFirebase } from '../Firebase';
@@ -16,7 +16,7 @@ class PasswordForgetForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     const { email } = this.state;
 
     this.props.firebase
@@ -24,14 +24,14 @@ class PasswordForgetForm extends Component {
       .then(() => {
         this.setState({ ...INITIAL_STATE });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ error });
       });
 
     event.preventDefault();
   };
 
-  onChange = event => {
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -41,22 +41,24 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-          className="mb-2 py-2 px-1 w-full bg-gray-200"
+      <Fragment>
+        
+        <form onSubmit={this.onSubmit}>
+          <input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+            className="mb-2 py-2 px-1 w-full bg-gray-200"
+          />
+          <button disabled={isInvalid} type="submit" className="px-2 py-1 bg-gray-100 hover:bg-white border">
+            Reset My Password
+          </button>
 
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
-
-        {error && <p>{error.message}</p>}
-      </form>
+          {error && <p>{error.message}</p>}
+        </form>
+      </Fragment>
     );
   }
 }

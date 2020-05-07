@@ -4,10 +4,10 @@ import Layout from '../components/layout';
 import PasswordForgetForm from '../components/PasswordForget';
 
 const PasswordForgetPage = () => (
-  <Fragment>
-    <h1>PasswordForget</h1>
+  <div className="max-w-xs mx-auto text-center">
+    <h1>Reset your Password</h1>
     <PasswordForgetForm />
-  </Fragment>
+  </div>
 );
 
 export default () => (

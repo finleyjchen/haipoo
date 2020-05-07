@@ -17,14 +17,14 @@ const Navigation = () => {
       Haipoo
     </Link>
     <div className={` `}>
-    <a href="#" onClick={ () => setOpen(!open)}><Menu /></a>
-    <ul className={`${ open ? '' : 'hidden' } text-center bg-white w-full  absolute top-0 left-0 mt-12 md:mt-32 flex flex-col text-gray-800 text-lg`}>
+    <a href="#" className="sm:hidden" onClick={ () => setOpen(!open)}><Menu /></a>
+    <ul className={`${ open ? '' : 'hidden' } sm:flex text-right bg-white w-full h-64 sm:h-auto absolute top-0 left-0 sm:static mt-12 sm:mt-0 flex flex-col sm:flex-row text-gray-800 text-lg`}>
       <li>
         <Link
           to={'/poem/' + 'all'}
           className="px-2 py-1 hover:text-gray-600"
           >
-          Home
+          View all Haipoos
         </Link>
       </li>
 
@@ -46,24 +46,30 @@ const NavigationAuth = ({ authUser }) => (
   <React.Fragment>
     <li>
       <Link
-        to={ROUTES.ACCOUNT}
+        to={ROUTES.PROFILE}
         className="px-2 py-1 hover:text-gray-600"
       >
-        Account
+        Profile
       </Link>
     </li>
 
     <li>
       <Link
-        to={ROUTES.CREATE}
+        to={ROUTES.COMPOSE}
         className="px-2 py-1 hover:text-gray-600"
       >
-        Create
+        Compose
       </Link>
     </li>
     <li>
-      <SignOutButton />
+      <Link
+        to={ROUTES.SETTINGS}
+        className="px-2 py-1 hover:text-gray-600"
+      >
+        Settings
+      </Link>
     </li>
+
   </React.Fragment>
 );
 

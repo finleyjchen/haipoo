@@ -89,6 +89,13 @@ class Firebase {
 
   user = uid => this.db.ref(`users/${uid}`);
 
+  checkUsername = username => this.deb.ref().child("users").orderByChild("username").equalTo(username).on("value", function(snapshot) {
+    if (snapshot.exists()) {
+      console.log("exists");
+    }else{
+        console.log("doesn't exist");
+      }
+  });
   users = () => this.db.ref('users');
 
   // *** Message API ***

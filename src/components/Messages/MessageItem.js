@@ -100,7 +100,7 @@ class MessageItem extends Component {
                 )}
               </p>
 
-              <p className="whitespace-pre-line  mb-2 text-2xl">{message.text}</p>
+              <p className="whitespace-pre-line  mb-2 text-2xl md:text-4xl">{message.text}</p>
             </div>
             <div className="flex justify-between mt-10 border-t border-black w-64 mx-auto pt-1">
               <p>
