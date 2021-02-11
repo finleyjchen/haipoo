@@ -1,5 +1,5 @@
 # Haipoo v1
 Techonologies used
-- Gatsby
+- React/Gatsby Static Site Generator
 - Firebase authentication
 - Firebase real-time database
